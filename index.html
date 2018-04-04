@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-guide-concepts-1-production</title>
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    
+</head>
+<body >
+  <div ng-app ng-init="
+  firstname;
+  lastname;
+  dob;
+  gender;
+  ">
+    <div>
+      First Name: <input ng-model="firstname">
+    </div><br>
+    <div>
+      Last Name: <input ng-model="lastname">
+    </div><br>
+    <div>
+      DOB: <input type="number" ng-model="dob">
+    </div><br>
+    <div>
+      Gender: <input ng-model="gender">
+    </div><br>
+    <div>
+      <br><b>First Name: </b> {{firstname}}<br>
+      <br><b>Last Name: </b> {{lastname}}<br>
+      <br><b>DOB: </b> {{dob}}<br>
+      <br><b>Gender: </b> {{gender}}<br>
+      <br><b>Full Name: </b> {{firstname+' '+lastname}}<br>
+      <br><b>Age: </b>{{ dob ? 2018-dob:0 }}<br>
+    </div>
+  </div>
+</body>
+</html>
+
+<!-- 
+Copyright 2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
