@@ -1,37 +1,50 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Example - example-guide-concepts-1-production</title>
-  
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    
+  <script src="index.js"></script>
+
 </head>
-<body >
-  <div ng-app ng-init="firstname;lastname;dob;gender;">
+
+<body>
+  <div ng-app="index" ng-controller="PersonController as person">
     <div>
-      First Name: <input ng-model="firstname">
-    </div><br>
+      First Name:
+      <input ng-model="person.firstname">
+    </div>
+    <br>
     <div>
-      Last Name: <input ng-model="lastname">
-    </div><br>
+      Last Name:
+      <input ng-model="person.lastname">
+    </div>
+    <br>
     <div>
-      DOB: <input type="number" ng-model="dob">
-    </div><br>
+      DOB:
+      <input type="date" ng-model="person.dob">
+    </div>
+    <br>
     <div>
-      Gender: <input ng-model="gender">
-    </div><br>
+      Gender:
+      <input ng-model="person.gender">
+    </div>
+    <br>
     <div>
-      <br><b>First Name: </b> {{firstname}}<br>
-      <br><b>Last Name: </b> {{lastname}}<br>
-      <br><b>DOB: </b> {{dob}}<br>
-      <br><b>Gender: </b> {{gender}}<br>
-      <br><b>Full Name: </b> {{firstname+' '+lastname}}<br>
-      <br><b>Age: </b>{{ dob ? 2018-dob:0 }}<br>
+      <p ng-if="person.firstname">First Name: {{person.firstname}}</p>
+      <p ng-if="person.lastname">Last Name: {{person.lastname}}</p>
+      <p ng-if="person.dob">DOB: {{person.dob|date}}</p>
+      <p ng-if="person.gender">Gender: {{person.gender}}</p>
+      <p ng-if="person.firstname && person.lastname">Full Name: {{person.getFullName()}}</p>
+      <p ng-if="person.dob">Age: {{ person.getAge()}}</p>
+      <p ng-if="person.dob">Full Age: {{ person.getFullAge()}}</p>
     </div>
   </div>
 </body>
+
 </html>
 
 <!-- 
