@@ -28,15 +28,15 @@ myApp.controller("PersonController", function PersonController() {
 
         var remainder = (currentDate - yob);
         years = Math.floor(remainder / this.ms.msPerYear);
-        remainder = remainder % this.ms.msPerYear;
+        remainder %= this.ms.msPerYear;
         months = Math.floor(remainder / this.ms.msPerMonth);
-        remainder = remainder % this.ms.msPerMonth;
+        remainder %= this.ms.msPerMonth;
         days = Math.floor(remainder / this.ms.msPerDay);
-        remainder = remainder % this.ms.msPerDay;
+        remainder %= this.ms.msPerDay;
         hours = Math.floor(remainder / this.ms.msPerHour);
-        remainder = remainder % this.ms.msPerHour;
+        remainder %= this.ms.msPerHour;
         minutes = Math.floor(remainder / this.ms.msPerMinute);
-        remainder = remainder % this.ms.msPerMinute;
+        remainder %= this.ms.msPerMinute;
         seconds = Math.floor(remainder / this.ms.msPerSecond);
 
         if (this.dob) {
