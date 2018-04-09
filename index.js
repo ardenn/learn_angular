@@ -50,5 +50,8 @@ myApp.controller("PersonController", ["eitService",
         this.removeEit = (eit) => {
             eitService.eits.splice(this.getEitList().indexOf(eit), 1);
         }
+        this.loadEits = () => {
+            eitService.loadEits();
+        }
 
     }])

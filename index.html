@@ -12,13 +12,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1"
+    crossorigin="anonymous">
+
+
 </head>
 
 <body>
-  <div class="container" ng-app="index" ng-controller="PersonController as person">
+  <div class="container-fluid" ng-app="index" ng-controller="PersonController as person">
     <div class="row">
       <section class="col-sm" id="crud-add">
-        <h3 style="padding-top:30px;">Add Eit</h3>
+        <h3 style="padding-top:30px;">Add Eit
+          <button class="btn btn-success" ng-click="person.loadEits()">Load Eits</button>
+        </h3>
         <form>
           <div class="form-group">
             <label>
@@ -67,13 +73,32 @@
       </section>
       <section class="col-sm">
         <h3 style="padding-top:30px;">EIT List</h3>
-        <ul>
-          <li ng-repeat="item in person.getEitList() track by item.id">
-            <p>{{item.id+" "+item.firstname+" "+item.lastname}}
-              <button class="btn btn-danger" ng-click="person.removeEit(item)">Remove</button>
-            </p>
-          </li>
-        </ul>
+        <p class="alert alert-danger" ng-if="person.getEitList().length == 0">Sorry No Eits Added</p>
+        <table ng-if="person.getEitList().length > 0" class="table table-stripped">
+          <thead>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in person.getEitList() track by item.id">
+              <td>{{item.id}}</td>
+              <td>{{item.firstname}}</td>
+              <td>{{item.lastname}}</td>
+              <td>
+                <span ng-click="person.removeEit(item)">
+                  <i class="fa fa-trash"></i>
+                </span>
+              </td>
+              <td>
+                <span ng-click="person.viewEit(item)">
+                  <i class="fa fa-eye"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </div>
   </div>

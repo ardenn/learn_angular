@@ -12,6 +12,17 @@ myService.service("eitService", function eitService() {
             })
         }
     }
+    var INITIAL = [
+        { id: 1, firstname: "Angel", lastname: "Mbeda", dob: "Apr 09 1992", gender: "Female" },
+        { id: 2, firstname: "Kevin", lastname: "Systrom", dob: "Apr 09 1992", gender: "Male" },
+        { id: 3, firstname: "Arden", lastname: "Jess", dob: "Apr 09 1992", gender: "Female" },
+        { id: 4, firstname: "King", lastname: "Kaka", dob: "Apr 09 1992", gender: "Male" },
+        { id: 5, firstname: "Lost", lastname: "Hope", dob: "Apr 09 1992", gender: "Female" },
+        { id: 6, firstname: "Hannibal", lastname: "Lecter", dob: "Apr 09 1992", gender: "Male" }
+    ]
+    this.loadEits = () => {
+        this.eits = INITIAL.slice();
+    }
     this.ms = {
         msPerYear: 31536000000,
         msPerMonth: 2628000000,
