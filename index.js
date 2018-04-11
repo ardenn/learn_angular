@@ -5,6 +5,9 @@ myApp.controller("AddController", ["eitService",
         this.lastname;
         this.dob;
         this.gender;
+        this.editing = () => {
+            return eitService.editing;
+        }
         this.addEit = (fname, lname, dob, gender) => {
             if (fname) {
                 eitService.addEit(fname, lname, dob, gender);
@@ -32,6 +35,9 @@ myApp.controller("ViewController", ["eitService",
         this.getFullAge = (eit) => {
             return eitService.getFullAge(eit);
         }
+        this.clearActiveView = () => {
+            eitService.activeEit = null;
+        }
     }
 ])
 myApp.controller("ListController", ["eitService",
@@ -47,6 +53,9 @@ myApp.controller("ListController", ["eitService",
         }
         this.viewEit = (id) => {
             eitService.activeEit = id;
+        }
+        this.editEit = (id) => {
+            eitService.activeEitEdit = id;
         }
 
     }

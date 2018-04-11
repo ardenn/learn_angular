@@ -58,7 +58,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">{{c_view.getActiveEit().id+" . "+c_view.getActiveEit().firstname}}
-                <i class="float-right fa fa-times" style="color: red;"></i>
+                <i class="float-right fa fa-times" style="color: red;" ng-click="c_view.clearActiveView()"></i>
               </h5>
               <p class="card-text"> Name: {{c_view.getActiveEit().firstname +" "+ c_view.getActiveEit().lastname}}</p>
             </div>
@@ -87,13 +87,14 @@
               <td>{{item.firstname}}</td>
               <td>{{item.lastname}}</td>
               <td>
-                <span ng-click="c_list.removeEit(item.id)">
+                <span ng-click="c_list.removeEit(item.id)" style="padding: 0px 5px;">
                   <i class="fa fa-trash"></i>
                 </span>
-              </td>
-              <td>
-                <span ng-click="c_list.viewEit(item.id)">
+                <span ng-click="c_list.viewEit(item.id)" style="padding: 0px 5px;">
                   <i class="fa fa-eye"></i>
+                </span>
+                <span ng-click="c_list.editEit(item.id)" style="padding: 0px 5px;">
+                  <i class="fa fa-edit"></i>
                 </span>
               </td>
             </tr>

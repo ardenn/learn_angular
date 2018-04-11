@@ -2,6 +2,7 @@ var myService = angular.module("eitservices", [])
 myService.service("eitService", function eitService() {
     this.eits = {};
     this.COUNTER = 1;
+    this.editing = false;
     this.addEit = (fname, lname, dob, gender) => {
         this.eits[this.COUNTER] = {
             id: this.COUNTER,
@@ -12,9 +13,13 @@ myService.service("eitService", function eitService() {
         };
         this.COUNTER += 1;
     }
-    this.activeEit
+    this.activeEit;
+    this.activeEitEdit;
     this.getActiveEit = () => {
         return this.eits[this.activeEit];
+    }
+    this.getActiveEitEdit = () => {
+        return this.eits[this.activeEitEdit];
     }
     this.loadEits = () => {
         this.eits = {
