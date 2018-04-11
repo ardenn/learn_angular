@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Example - example-guide-concepts-1-production</title>
+  <title>EIT | Angular</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="service.js"></script>
   <script src="index.js"></script>
@@ -19,62 +19,62 @@
 </head>
 
 <body>
-  <div class="container-fluid" ng-app="index" ng-controller="PersonController as person">
+  <div class="container-fluid" ng-app="index">
     <div class="row">
-      <section class="col-sm" id="crud-add">
+      <section class="col-sm" id="crud-add" ng-controller="AddController as c_add">
         <h3 style="padding-top:30px;">Add Eit
-          <button class="btn btn-success" ng-click="person.loadEits()">Load Eits</button>
+          <button class="btn btn-success" ng-click="c_add.loadEits()">Load Eits</button>
         </h3>
         <form>
           <div class="form-group">
-            <label>
-              First Name:
-              <input required ng-model="person.firstname" class="form-control">
-            </label>
+            <label>First Name:</label>
+            <input required ng-model="c_add.firstname" class="form-control">
           </div>
           <div class="form-group">
-            <label>
-              Last Name:
-              <input required ng-model="person.lastname" class="form-control">
-            </label>
+            <label>Last Name:</label>
+            <input required ng-model="c_add.lastname" class="form-control">
           </div>
           <div class="form-group">
-            <label>
-              DOB:
-              <input required type="date" ng-model="person.dob" class="form-control">
-            </label>
+            <label>DOB:</label>
+            <input required type="date" ng-model="c_add.dob" class="form-control">
           </div>
           <div class="form-group">
-            <p>Gender: </p>
-            <label>
-              <input class="form-control" type="radio" value="Male" ng-model="person.gender">Male
-            </label>
-            <label>
-              <input class="form-control" type="radio" value="Female" ng-model="person.gender">Female
-            </label>
-            <label>
-              <input class="form-control" type="radio" value="Other" ng-model="person.gender">Other
-            </label>
+            <label>Gender : </label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" value="Male" ng-model="c_add.gender">
+              <label class="form-check-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" value="Female" ng-model="c_add.gender">
+              <label class="form-check-label">Female</label>
+            </div>
           </div>
-          <button class="btn btn-success" ng-click="person.addEit(person.firstname,person.lastname,person.dob,person.gender)">Add EIT</button>
+          <button class="btn btn-success" ng-click="c_add.addEit(c_add.firstname,c_add.lastname,c_add.dob,c_add.gender)">Add EIT</button>
         </form>
       </section>
-      <section class="col-sm" id="crud-read">
+      <section class="col-sm" id="crud-view" ng-controller="ViewController as c_view">
         <h3 style="padding-top:30px;">EIT Details</h3>
-        <div>
-          <p ng-if="person.firstname">First Name: {{person.firstname}}</p>
-          <p ng-if="person.lastname">Last Name: {{person.lastname}}</p>
-          <p ng-if="person.dob">DOB: {{person.dob|date}}</p>
-          <p ng-if="person.gender">Gender: {{person.gender}}</p>
-          <p ng-if="person.firstname && person.lastname">Full Name: {{person.getFullName()}}</p>
-          <p ng-if="person.dob">Age: {{ person.getAge()}}</p>
-          <p ng-if="person.dob">Full Age: {{ person.getFullAge()}}</p>
+        <div ng-if="c_view.getActiveEit()">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{c_view.getActiveEit().id+" . "+c_view.getActiveEit().firstname}}
+                <i class="float-right fa fa-times" style="color: red;"></i>
+              </h5>
+              <p class="card-text"> Name: {{c_view.getActiveEit().firstname +" "+ c_view.getActiveEit().lastname}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">DOB: {{c_view.getActiveEit().dob|date}}</li>
+              <li class="list-group-item">Gender: {{c_view.getActiveEit().gender}}</li>
+              <li class="list-group-item">Age: {{ c_view.getAge(c_view.getActiveEit())}}</li>
+              <li class="list-group-item">Full Age: {{ c_view.getFullAge(c_view.getActiveEit())}}</li>
+            </ul>
+          </div>
         </div>
       </section>
-      <section class="col-sm">
+      <section class="col-sm" ng-controller="ListController as c_list">
         <h3 style="padding-top:30px;">EIT List</h3>
-        <p class="alert alert-danger" ng-if="person.getEitList().length == 0">Sorry No Eits Added</p>
-        <table ng-if="person.getEitList().length > 0" class="table table-stripped">
+        <p class="alert alert-warning" ng-if="c_list.getEitList().length == 0">Sorry No Eits Available</p>
+        <table ng-if="c_list.getEitList().length > 0" class="table table-stripped">
           <thead>
             <th>Id</th>
             <th>First Name</th>
@@ -82,17 +82,17 @@
             <th>Actions</th>
           </thead>
           <tbody>
-            <tr ng-repeat="item in person.getEitList() track by item.id">
+            <tr ng-repeat="item in c_list.getEitList() track by item.id">
               <td>{{item.id}}</td>
               <td>{{item.firstname}}</td>
               <td>{{item.lastname}}</td>
               <td>
-                <span ng-click="person.removeEit(item)">
+                <span ng-click="c_list.removeEit(item.id)">
                   <i class="fa fa-trash"></i>
                 </span>
               </td>
               <td>
-                <span ng-click="person.viewEit(item)">
+                <span ng-click="c_list.viewEit(item.id)">
                   <i class="fa fa-eye"></i>
                 </span>
               </td>
