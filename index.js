@@ -5,12 +5,24 @@ myApp.controller("AddController", ["eitService",
         this.lastname;
         this.dob;
         this.gender;
-        this.editing = () => {
-            return eitService.editing;
+        this.editState = () => {
+            return eitService.editState;
+        }
+        this.getActiveEitEdit = () => {
+            return eitService.editState ? eitService.getActiveEitEdit() : null;
         }
         this.addEit = (fname, lname, dob, gender) => {
             if (fname) {
                 eitService.addEit(fname, lname, dob, gender);
+                this.firstname = null;
+                this.lastname = null;
+                this.dob = null;
+                this.gender = null;
+            }
+        }
+        this.updateEit = (fname, lname, dob, gender) => {
+            if (fname) {
+                eitService.updateEit(fname, lname, dob, gender);
                 this.firstname = null;
                 this.lastname = null;
                 this.dob = null;
@@ -56,6 +68,7 @@ myApp.controller("ListController", ["eitService",
         }
         this.editEit = (id) => {
             eitService.activeEitEdit = id;
+            eitService.editState = true;
         }
 
     }
