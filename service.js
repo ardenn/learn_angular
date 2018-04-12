@@ -20,9 +20,28 @@ myService.service("eitService", function eitService() {
         this.eits[this.activeEitEdit].dob = dob ? dob : temp.dob;
         this.eits[this.activeEitEdit].gender = gender ? gender : temp.gender;
         this.editState = false;
+
     }
     this.activeEit;
     this.activeEitEdit;
+    this.removeEit = (id) => {
+        delete this.eits[id];
+    }
+    this.setEditState = (value) => {
+        this.editState = value;
+    }
+    this.setActiveEit = (id) => {
+        this.activeEit = id;
+    }
+    this.setActiveEitEdit = (id) => {
+        this.activeEitEdit = id;
+    }
+    this.getEits = () => {
+        return this.eits;
+    }
+    this.getEditState = () => {
+        return this.editState;
+    }
     this.getActiveEit = () => {
         return this.eits[this.activeEit];
     }
