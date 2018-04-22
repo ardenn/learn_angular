@@ -3,22 +3,18 @@ myService.service("eitService", function eitService() {
     this.eits = {};
     this.COUNTER = 1;
     this.editState = false;
-    this.addEit = (fname, lname, dob, gender) => {
-        this.eits[this.COUNTER] = {
-            id: this.COUNTER,
-            firstname: fname,
-            lastname: lname,
-            dob: dob,
-            gender: gender
-        };
+    this.addEit = (newEit) => {
+        newEit["id"] = this.COUNTER;
+        this.eits[this.COUNTER] = newEit;
         this.COUNTER += 1;
+        this.editState = false;
     }
-    this.updateEit = (fname, lname, dob, gender) => {
+    this.updateEit = (updatedEit) => {
         var temp = this.getActiveEitEdit()
-        this.eits[this.activeEitEdit].firstname = fname ? fname : temp.firstname;
-        this.eits[this.activeEitEdit].lastname = lname ? lname : temp.lname;
-        this.eits[this.activeEitEdit].dob = dob ? dob : temp.dob;
-        this.eits[this.activeEitEdit].gender = gender ? gender : temp.gender;
+        this.eits[this.activeEitEdit].firstname = updatedEit.firstname ? updatedEit.firstname : temp.firstname;
+        this.eits[this.activeEitEdit].lastname = updatedEit.lastname ? updatedEit.lastname : temp.lastname;
+        this.eits[this.activeEitEdit].dob = updatedEit.dob ? updatedEit.dob : temp.dob;
+        this.eits[this.activeEitEdit].gender = updatedEit.gender ? updatedEit.gender : temp.gender;
         this.editState = false;
 
     }
@@ -50,12 +46,12 @@ myService.service("eitService", function eitService() {
     }
     this.loadEits = () => {
         this.eits = {
-            1: { id: 1, firstname: "Angel", lastname: "Mbeda", dob: "1992-04-09", gender: "Female" },
-            2: { id: 2, firstname: "Kevin", lastname: "Systrom", dob: "1992-04-09", gender: "Male" },
-            3: { id: 3, firstname: "Arden", lastname: "Jess", dob: "1992-04-09", gender: "Female" },
-            4: { id: 4, firstname: "King", lastname: "Kaka", dob: "1992-04-09", gender: "Male" },
-            5: { id: 5, firstname: "Lost", lastname: "Hope", dob: "1992-04-09", gender: "Female" },
-            6: { id: 6, firstname: "Hannibal", lastname: "Lecter", dob: "1992-04-09", gender: "Male" }
+            1: { id: 1, firstname: "Angel", lastname: "Mbeda", dob: new Date(1992, 4, 9), gender: "Female" },
+            2: { id: 2, firstname: "Kevin", lastname: "Systrom", dob: new Date(1992, 4, 9), gender: "Male" },
+            3: { id: 3, firstname: "Arden", lastname: "Jess", dob: new Date(1992, 4, 9), gender: "Female" },
+            4: { id: 4, firstname: "King", lastname: "Kaka", dob: new Date(1992, 4, 9), gender: "Male" },
+            5: { id: 5, firstname: "Lost", lastname: "Hope", dob: new Date(1992, 4, 9), gender: "Female" },
+            6: { id: 6, firstname: "Hannibal", lastname: "Lecter", dob: new Date(1992, 4, 9), gender: "Male" }
         }
         this.COUNTER = 7;
     }

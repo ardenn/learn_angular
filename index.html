@@ -26,52 +26,52 @@
           <button class="btn btn-success" ng-click="c_add.loadEits()">Load Eits</button>
         </h3>
         <form>
-          <div ng-if="!c_add.getEditState()">
-            <small style="color: red;">creating</small>
+          <div ng-init="c_add.getActiveEitEdit()" ng-if="c_add.getEditState()">
+            <small style="color:red">editing</small>
             <div class="form-group">
               <label>First Name:</label>
-              <input required ng-model="c_add.firstname" class="form-control">
+              <input required ng-model="c_add.eit.firstname" class="form-control">
             </div>
             <div class="form-group">
               <label>Last Name:</label>
-              <input required ng-model="c_add.lastname" class="form-control">
+              <input required ng-model="c_add.eit.lastname" class="form-control">
             </div>
             <div class="form-group">
               <label>DOB:</label>
-              <input required type="date" ng-model="c_add.dob" class="form-control">
+              <input required type="date" ng-model="c_add.eit.dob" class="form-control">
             </div>
             <div class="form-group">
               <label>Gender</label>
-              <select class="form-control" ng-model="c_add.gender">
+              <select class="form-control" ng-model="c_add.eit.gender">
                 <option>Female</option>
                 <option>Male</option>
               </select>
             </div>
           </div>
-          <div ng-if="c_add.getEditState()">
-            <small style="color: red;">editing</small>
+          <div ng-if="!c_add.getEditState()">
+            <small style="color:#38F027">creating</small>
             <div class="form-group">
               <label>First Name:</label>
-              <input required class="form-control" ng-value="c_add.getActiveEitEdit().firstname" ng-model="c_add.firstname">
+              <input required ng-model="c_add.eit.firstname" class="form-control">
             </div>
             <div class="form-group">
               <label>Last Name:</label>
-              <input required class="form-control" ng-value="c_add.getActiveEitEdit().lastname" ng-model="c_add.lastname">
+              <input required ng-model="c_add.eit.lastname" class="form-control">
             </div>
             <div class="form-group">
               <label>DOB:</label>
-              <input required type="date" class="form-control" ng-value="c_add.getActiveEitEdit().dob" ng-model="c_add.dob">
+              <input required type="date" ng-model="c_add.eit.dob" class="form-control">
             </div>
             <div class="form-group">
               <label>Gender</label>
-              <select class="form-control" ng-model="c_add.gender">
-                <option ng-selected="c_add.getActiveEitEdit().gender == 'Female'">Female</option>
-                <option ng-selected="c_add.getActiveEitEdit().gender == 'Male'">Male</option>
+              <select class="form-control" ng-model="c_add.eit.gender">
+                <option>Female</option>
+                <option>Male</option>
               </select>
             </div>
           </div>
-          <button class="btn btn-success" ng-click="c_add.addEit(c_add.firstname,c_add.lastname,c_add.dob,c_add.gender)">Add</button>
-          <button class="btn btn-success" ng-click="c_add.updateEit(c_add.firstname,c_add.lastname,c_add.dob,c_add.gender)">Update</button>
+          <button class="btn btn-success" ng-click="c_add.addEit()">Add</button>
+          <button class="btn btn-success" ng-click="c_add.updateEit()">Update</button>
         </form>
       </section>
       <section class="col-sm" id="crud-view" ng-controller="ViewController as c_view">

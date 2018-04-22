@@ -1,31 +1,23 @@
 var myApp = angular.module("index", ["eitservices"]);
 myApp.controller("AddController", ["eitService",
     function AddController(eitService) {
-        this.firstname;
-        this.lastname;
-        this.dob;
-        this.gender;
+        this.eit;
         this.getEditState = () => {
             return eitService.getEditState();
         }
         this.getActiveEitEdit = () => {
-            return eitService.getEditState() ? eitService.getActiveEitEdit() : null;
+            this.eit = eitService.getEditState() ? angular.copy(eitService.getActiveEitEdit()) : null;
         }
-        this.addEit = (fname, lname, dob, gender) => {
-            if (fname) {
-                eitService.addEit(fname, lname, dob, gender);
-                this.firstname = null;
-                this.lastname = null;
-                this.dob = null;
-                this.gender = null;
+        this.addEit = () => {
+            if (this.eit.firstname) {
+                eitService.addEit(this.eit);
+                console.log(this.eit.dob)
+                this.eit = null;
             }
         }
-        this.updateEit = (fname, lname, dob, gender) => {
-            eitService.updateEit(fname, lname, dob, gender);
-            this.firstname = null;
-            this.lastname = null;
-            this.dob = null;
-            this.gender = null;
+        this.updateEit = () => {
+            eitService.updateEit(this.eit);
+            this.eit = null;
         }
         this.loadEits = () => {
             eitService.loadEits();
